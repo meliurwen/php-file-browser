@@ -3,7 +3,7 @@
 
 
 switch ($location) {
-	case "sharedFiles":
+	case "public":
 		$loc = "../sharedFiles";
 		break;
 	case "root":
@@ -13,12 +13,12 @@ switch ($location) {
 		$loc = "/home";
 		break;
 	default:
-		exit("This location doesn't exists!");
+		exit("This location doesn't exist!");
 }
 
 if (!is_dir($loc)) {
 	trigger_error("Il path inserito nella variabile non è raggiungibile!", E_USER_NOTICE);
-	exit("This location doesn't exists!");
+	exit("This location doesn't exist!");
 }
 
 

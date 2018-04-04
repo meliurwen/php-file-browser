@@ -132,13 +132,13 @@
 				
 				if ($file != "." && $file != ".." && is_dir($directory . "/" . $file))
 				{
-					echo '<td><img src="/images/ico_folder.gif" title="Vai a docs" /><a href="'.$_SERVER['PHP_SELF'].'?loc=' . $location . '&dir=' . $directory . '/' . $file . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td></td>';
+					echo '<td><img src="images/ico_folder.gif" title="Vai a docs" /><a href="'.$_SERVER['PHP_SELF'].'?loc=' . $location . '&dir=' . $directory . '/' . $file . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td></td>';
 		                        $i = $i + 1;
 				}
 
 				if ($file != "." && $file != ".." && !is_dir($directory . "/" . $file) && strtolower(substr($file, strrpos($file, '.') + 1)) != 'php')
 				{
-					echo '<td><img src="/images/ico_file.gif" title="Apri README" /><a href="download.php?loc=' . $location . '&file=' . urlencode($directory . '/' . $file) . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td> ' . formatSizeUnits(filesize($directory . "/" . $file)) . '</td>';
+					echo '<td><img src="images/ico_file.gif" title="Apri README" /><a href="download.php?loc=' . $location . '&file=' . urlencode($directory . '/' . $file) . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td> ' . formatSizeUnits(filesize($directory . "/" . $file)) . '</td>';
 					$i = $i + 1;
 				}
 				echo "</tr>";

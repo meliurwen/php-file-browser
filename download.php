@@ -27,14 +27,14 @@
         // the single quotation mark
         $fileName = str_replace("'", "\\'", str_replace('"', '\\"', str_replace("\\", "\\\\", basename($fileRelativePath))));
 
-        $fileAbsolutePath = $loc  . "/" . $fileRelativePath;
-
         // In order to not allow the user to get outside the shared directory
-        if (strpos($fileAbsolutePath, '../') !== false) {
+        if (strpos($fileRelativePath, '../') !== false) {
             $allowedPath = False;
         } else {
             $allowedPath = True;
         }
+
+        $fileAbsolutePath = $loc  . "/" . $fileRelativePath;
 
         if(file_exists ($fileAbsolutePath) and $allowedPath){
 
