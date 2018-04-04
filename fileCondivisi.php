@@ -16,8 +16,8 @@
 	if($isAuthenticated) {
 
 		#Usando $location come parametro di input restituisce
-		#il path assoluto delle directory atraverso il
-		#parametro $loc come outputleCondivisi
+		#il path assoluto delle directory attraverso il
+		#parametro $loc come output
 		include "folderLocations.php";
 
 		#Cambio nuovamente la root directory
@@ -39,6 +39,10 @@
 		td{font-size: small;}
 		td > a{text-decoration: none; color: #000;}
 		td > a:hover {text-decoration: underline;}
+
+		.dateCol {padding-right:5px;}
+		.position {margin-top:0px; font-size: small;}
+		.titleLoc {margin-bottom:0px;}
 	</style>
 
 
@@ -47,7 +51,8 @@
 
 <body>
 
-	<!-- Log out option -->
+<!--
+	<!- - Log out option - ->
 	<form class="controlbox" name="Logout" id="logout" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
 		<input type="hidden" name="op" value="logout"/>
 		<input type="hidden" name="username"value="<?php echo $_SESSION["username"]; ?>" />
@@ -59,9 +64,7 @@
 			<a href="index.php">Home</a>
 		</div>
 	</form>
-
-
-	<p><a href="download.php?=cacca.mp3">MUSICA</a></p>
+-->
 
 <?php
 		$defaultDir = ".";
@@ -84,6 +87,10 @@
 		else{
 			$directory = $defaultDir;
 		}
+
+		#Mostra la posizione
+		echo '<h1 class="titleLoc">' . $location . '</h1>';
+		echo '<p class="position">' . $directory . '</p>';
 
 		#Se sono in una sottodirectory della root folder, compare il tasto "Indietro" che mi fa tornare alla cartella superiore
 		if($directory != $defaultDir){
@@ -125,13 +132,13 @@
 				
 				if ($file != "." && $file != ".." && is_dir($directory . "/" . $file))
 				{
-					echo '<td><img src="/images/ico_folder.gif" title="Vai a docs" /><a href="'.$_SERVER['PHP_SELF'].'?loc=' . $location . '&dir=' . $directory . '/' . $file . '">'.$file.'</a></td><td>' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td></td>';
+					echo '<td><img src="/images/ico_folder.gif" title="Vai a docs" /><a href="'.$_SERVER['PHP_SELF'].'?loc=' . $location . '&dir=' . $directory . '/' . $file . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td></td>';
 		                        $i = $i + 1;
 				}
 
 				if ($file != "." && $file != ".." && !is_dir($directory . "/" . $file) && strtolower(substr($file, strrpos($file, '.') + 1)) != 'php')
 				{
-					echo '<td><img src="/images/ico_file.gif" title="Apri README" /><a href="' . $directory . '/' . $file . '">'.$file.'</a></td><td>' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td> ' . formatSizeUnits(filesize($directory . "/" . $file)) . '</td>';
+					echo '<td><img src="/images/ico_file.gif" title="Apri README" /><a href="download.php?loc=' . $location . '&file=' . urlencode($directory . '/' . $file) . '">'.$file.'</a></td><td class="dateCol">' . date("y-m-d H:i:s T",filemtime($directory . "/" . $file)) . '</td><td> ' . formatSizeUnits(filesize($directory . "/" . $file)) . '</td>';
 					$i = $i + 1;
 				}
 				echo "</tr>";

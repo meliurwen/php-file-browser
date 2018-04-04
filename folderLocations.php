@@ -13,12 +13,12 @@ switch ($location) {
 		$loc = "/home";
 		break;
 	default:
-		exit("Location inesistente!");
+		exit("This location doesn't exists!");
 }
 
 if (!is_dir($loc)) {
 	trigger_error("Il path inserito nella variabile non è raggiungibile!", E_USER_NOTICE);
-	exit("Location inesistente!");
+	exit("This location doesn't exists!");
 }
 
 
